@@ -114,3 +114,5 @@ indicate which CWAC module you have questions about.
 Bear in mind that the person who converted `TouchInterceptor`
 into `TouchListView` does not fully understand the original
 `TouchInterceptor` code, and so support may be limited.
+
+[gg]: http://groups.google.com/group/cw-android
