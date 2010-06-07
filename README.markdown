@@ -37,9 +37,14 @@ attributes:
  operation (required)
  * `dragndrop_background`: a color to use as the background of your
  row when it is being dragged (defaults to being fully transparent)
- * `remove_mode`: can be none (user cannot remove entries), slide
- (user can remove entries by dragging outside of the list),
- or fling (...not quite sure what this does) (defaults to none)
+ * `remove_mode`: can be `none` (user cannot remove entries), `slideRight`
+ (user can remove entries by dragging to the right quarter of the list),
+ `slideLeft`
+ (user can remove entries by dragging to the left quarter of the list),
+ or fling (...not quite sure what this does) (defaults to `none`)
+ 
+**NOTE**: `remove_mode` of `slide` is equivalent to `slideRight`, but
+`slideRight` is recommended.
  
 For example, here is the layout from the demo project:
 
@@ -54,7 +59,7 @@ For example, here is the layout from the demo project:
 		android:drawSelectorOnTop="false"
 		tlv:normal_height="64dip"
 		tlv:grabber="@+id/icon"
-		tlv:remove_mode="slide"
+		tlv:remove_mode="slideRight"
 	/>
 
 You will need to change the `com.commonsware.cwac.tlv.demo` to
@@ -85,7 +90,7 @@ project-level resources.
 
 Version
 -------
-This is version 0.1 of this module, meaning it is pretty darn
+This is version 0.1.1 of this module, meaning it is pretty darn
 new, though the underlying Android open source code has been
 in use for quite some time.
 

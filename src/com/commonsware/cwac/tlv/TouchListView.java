@@ -51,7 +51,8 @@ public class TouchListView extends ListView {
 	private int mHeight;
 	private GestureDetector mGestureDetector;
 	public static final int FLING = 0;
-	public static final int SLIDE = 1;
+	public static final int SLIDE_RIGHT = 1;
+	public static final int SLIDE_LEFT = 2;
 	private int mRemoveMode = -1;
 	private Rect mTempRect = new Rect();
 	private Bitmap mDragBitmap;
@@ -127,9 +128,14 @@ public class TouchListView extends ListView {
 									mCoordOffset = ((int)ev.getRawY()) - y;
 									View dragger = item.findViewById(grabberId);
 									Rect r = mTempRect;
-									dragger.getDrawingRect(r);
-									// The dragger icon itself is quite small, so pretend the touch area is bigger
-									if (x < r.right * 2) {
+//									dragger.getDrawingRect(r);
+									
+									r.left=dragger.getLeft();
+									r.right=dragger.getRight();
+									r.top=dragger.getTop();
+									r.bottom=dragger.getBottom();									
+									
+									if ((r.left<x) && (x<r.right)) {
 											item.setDrawingCacheEnabled(true);
 											// Create a copy of the drawing cache so that it does not get recycled
 											// by the framework when the list tries to clean up memory
@@ -278,7 +284,13 @@ public class TouchListView extends ListView {
 									Rect r = mTempRect;
 									mDragView.getDrawingRect(r);
 									stopDragging();
-									if (mRemoveMode == SLIDE && ev.getX() > r.right * 3 / 4) {
+									
+									if (mRemoveMode == SLIDE_RIGHT && ev.getX() > r.left+(r.width()*3/4)) {
+											if (mRemoveListener != null) {
+													mRemoveListener.remove(mFirstDragPos);
+											}
+											unExpandViews(true);
+									} else if (mRemoveMode == SLIDE_LEFT && ev.getX() < r.left+(r.width()/4)) {
 											if (mRemoveListener != null) {
 													mRemoveListener.remove(mFirstDragPos);
 											}
@@ -363,11 +375,18 @@ public class TouchListView extends ListView {
 	}
 	
 	private void dragView(int x, int y) {
-			if (mRemoveMode == SLIDE) {
-					float alpha = 1.0f;
-					int width = mDragView.getWidth();
+			float alpha = 1.0f;
+			int width = mDragView.getWidth();
+			
+			if (mRemoveMode == SLIDE_RIGHT) {
 					if (x > width / 2) {
 							alpha = ((float)(width - x)) / (width / 2);
+					}
+					mWindowParams.alpha = alpha;
+			}
+			else if (mRemoveMode == SLIDE_LEFT) {
+					if (x < width / 2) {
+							alpha = ((float)x) / (width / 2);
 					}
 					mWindowParams.alpha = alpha;
 			}

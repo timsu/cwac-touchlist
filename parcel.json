@@ -1,7 +1,7 @@
 {
 "name": "cwac-touchlist",
 "description": "CWAC TouchListView, a ListView with drag-and-drop support",
-"version": "0.1.0",
+"version": "0.1.1",
 "maintainers": [
 		{
 			"name": "Mark Murphy",

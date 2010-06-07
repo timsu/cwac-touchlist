@@ -67,7 +67,7 @@
     <target name="prep">
         <exec executable="parcel">
             <arg value="install" />
-            <arg value="../parcel/cwac-touchlist_0.1.0.zip" />
+            <arg value="../parcel/cwac-touchlist_0.1.1.zip" />
             <arg value="--replace" />
         </exec>
     </target>

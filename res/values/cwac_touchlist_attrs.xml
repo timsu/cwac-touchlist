@@ -8,6 +8,8 @@
 			<enum name="none" value="-1" />
 			<enum name="fling" value="0" />
 			<enum name="slide" value="1" />
+			<enum name="slideRight" value="1" />
+			<enum name="slideLeft" value="2" />
 		</attr>
 	</declare-styleable>
 </resources>

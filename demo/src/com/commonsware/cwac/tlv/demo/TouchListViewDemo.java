@@ -55,7 +55,7 @@ public class TouchListViewDemo extends ListActivity {
 	
 	class IconicAdapter extends ArrayAdapter<String> {
 		IconicAdapter() {
-			super(TouchListViewDemo.this, R.layout.row, array);
+			super(TouchListViewDemo.this, R.layout.row2, array);
 		}
 		
 		public View getView(int position, View convertView,
@@ -65,7 +65,7 @@ public class TouchListViewDemo extends ListActivity {
 			if (row==null) {													
 				LayoutInflater inflater=getLayoutInflater();
 				
-				row=inflater.inflate(R.layout.row, parent, false);
+				row=inflater.inflate(R.layout.row2, parent, false);
 			}
 			
 			TextView label=(TextView)row.findViewById(R.id.label);
