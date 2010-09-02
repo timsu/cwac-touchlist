@@ -13,8 +13,11 @@ as of Android 2.2.
 to be configured from an XML layout file, replacing some
 hard-wired values that `TouchInterceptor` uses.
 
-This is available from [the Android Parcel Project](http://andparcel.com) as the
-`cwac-touchlist` parcel.
+This is distributed as an Android library project, following
+the conventions of [the Android Parcel Project](http://andparcel.com).
+You can download a ZIP file containing just the library project
+(sans sample code) from the Downloads section of this GitHub
+repository.
 
 Usage
 -----
@@ -24,8 +27,10 @@ to be built via Ant from the command line. Compile the top-level
 project first via `ant parcel`, then compile and install the
 demo project via `ant demo`.
 
-To work with `TouchListView` in your own project, install
-the `cwac-touchlist` parcel and add a `com.commonsware.cwac.tlv.TouchListView`
+To work with `TouchListView` in your own project, place the
+library project somewhere and update your project to reference
+the library project (via Eclipse, via `android update lib-project`, etc.).
+Then, add a `com.commonsware.cwac.tlv.TouchListView`
 widget to your XML layout file. You have five customizable
 attributes:
 
@@ -46,7 +51,7 @@ attributes:
 **NOTE**: `remove_mode` of `slide` is equivalent to `slideRight`, but
 `slideRight` is recommended.
  
-For example, here is the layout from the demo project:
+For example, here is the layout from the `demo/` project:
 
 	<?xml version="1.0" encoding="utf-8"?>
 	<com.commonsware.cwac.tlv.TouchListView
@@ -85,24 +90,23 @@ has initiated a drag operation.
 
 Dependencies
 ------------
-This depends upon the `cwac-parcel` parcel for accessing
-project-level resources.
+This depends upon the `CWAC-Parcel` JAR for accessing
+project-level resources. That can be obtained from its
+[GitHub repository](http://github.com/commonsguy/cwac-parcel),
+though a compatible edition of the JAR
+is included in this GitHub repo for convenience.
 
 Version
 -------
-This is version 0.1.1 of this module, meaning it is pretty darn
+This is version v0.2.0 of this module, meaning it is pretty darn
 new, though the underlying Android open source code has been
 in use for quite some time.
 
 Demo
 ----
-There is a `demo/` directory containing a demo project. If you
-have the Android Parcel Project client installed, you can
-run the `ant demo` command to install the requisite parcels into
-the demo project and install the resulting APK into your
-attached emulator or device. You will need to have compiled
-the top-level project via `ant parcel` to set up a local copy
-of the parcel file for `ant demo` to use.
+There is a `demo/` directory containing a demo project. It uses
+the library project itself to access the source code and
+resources of the `TouchListView` library.
 
 License
 -------
@@ -115,6 +119,10 @@ Questions
 If you have questions regarding the use of this code, please
 join and ask them on the [cw-android Google Group][gg]. Be sure to
 indicate which CWAC module you have questions about.
+
+Release Notes
+-------------
+v0.2.0: converted to Android library project
 
 Bear in mind that the person who converted `TouchInterceptor`
 into `TouchListView` does not fully understand the original

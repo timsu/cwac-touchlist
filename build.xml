@@ -63,33 +63,33 @@
          build steps are used.
     -->
     <setup />
-    
-    <target name="jar" depends="compile">
-        <jar
-            destfile="bin/CWAC-TouchListView.jar"
-            basedir="bin/classes"
-        />
-    </target>
-    
-    <target name="parcel" depends="jar">
-        <exec executable="parcel">
-            <arg value="package" />
-            <arg value="parcel.json" />
-            <arg value="--dir" />
-            <arg value="parcel" />
-            <arg value="-j" />
-            <arg value="bin/CWAC-TouchListView.jar" />
-            <arg value="-d" />
-            <arg value="README.markdown" />
-            <arg value="LICENSE" />
-        </exec>
+
+    <target name="dist-dir">
+        <mkdir dir="dist"/>
     </target>
 
-    <target name="lint">
-        <exec executable="parcel">
-            <arg value="lint" />
-            <arg value="parcel.json" />
-        </exec>
+    <target name="dist-full" depends="dist-dir">
+        <delete file="dist/CWAC-TouchListView-full.zip" />
+        <zip destfile="dist/CWAC-TouchListView-full.zip">
+            <zipfileset
+                dir="."
+                prefix="CWAC-TouchListView"
+                includes="**"
+                excludes="bin/**, dist/**, gen/**, .git/**, .gitignore, demo/bin/**, demo/gen/**"
+            />
+        </zip>
     </target>
-    
+
+    <target name="dist-lite" depends="dist-dir">
+        <delete file="dist/CWAC-TouchListView-lite.zip" />
+        <zip destfile="dist/CWAC-TouchListView-lite.zip">
+            <zipfileset
+                dir="."
+                prefix="CWAC-TouchListView"
+                includes="**"
+                excludes="bin/**, dist/**, gen/**, .git/**, .gitignore, demo/**"
+            />
+        </zip>
+    </target>
+  
 </project>
